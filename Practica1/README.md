@@ -6,7 +6,7 @@
 In this project, you'll build a few different UNIX utilities, simple versions
 of commonly used commands like **cat**, **ls**, etc. We'll call each of them a
 slightly different name to avoid confusion; for example, instead of **cat**,
-you'll be implementing **wcat** (i.e., "wisconsin" cat).
+you'll be implementing **UVacat** (i.e., "wisconsin" cat).
 
 Objectives:
 * Re-familiarize yourself with the C programming language
@@ -22,44 +22,44 @@ and of course a basic understanding of C programming. If you **do not** have
 these skills already, this is not the right place to start.
 
 Summary of what gets turned in:
-* A bunch of single .c files for each of the utilities below: **wcat.c**,
-  **UVagrep.c**, **wzip.c**, and **wunzip.c**.
+* A bunch of single .c files for each of the utilities below: **UVacat.c**,
+  **UVagrep.c**, **UVazip.c**, and **UVaunzip.c**.
 * Each should compile successfully when compiled with the **-Wall** and
 **-Werror** flags.
 * Each should (hopefully) pass the tests we supply to you.
 
-## wcat
+## UVacat
 
-The program **wcat** is a simple program. Generally, it reads a file as
+The program **UVacat** is a simple program. Generally, it reads a file as
 specified by the user and prints its contents. A typical usage is as follows,
 in which the user wants to see the contents of main.c, and thus types: 
 
 ```
-prompt> ./wcat main.c
+prompt> ./UVacat main.c
 #include <stdio.h>
 ...
 ```
 
-As shown, **wcat** reads the file **main.c** and prints out its contents. 
-The "**./**" before the **wcat** above is a UNIX thing; it just tells the
-system which directory to find **wcat** in (in this case, in the "." (dot)
+As shown, **UVacat** reads the file **main.c** and prints out its contents. 
+The "**./**" before the **UVacat** above is a UNIX thing; it just tells the
+system which directory to find **UVacat** in (in this case, in the "." (dot)
 directory, which means the current working directory). 
 
-To create the **wcat** binary, you'll be creating a single source file,
-**wcat.c**, and writing a little C code to implement this simplified version
+To create the **UVacat** binary, you'll be creating a single source file,
+**UVacat.c**, and writing a little C code to implement this simplified version
 of **cat**. To compile this program, you will do the following:
 
 ```
-prompt> gcc -o wcat wcat.c -Wall -Werror
+prompt> gcc -o UVacat UVacat.c -Wall -Werror
 prompt> 
 ```
 
-This will make a single *executable binary* called **wcat** which you can
+This will make a single *executable binary* called **UVacat** which you can
 then run as above. 
 
 You'll need to learn how to use a few library routines from the C standard
 library (often called **libc**) to implement the source code for this program,
-which we'll assume is in a file called **wcat.c**. All C code is
+which we'll assume is in a file called **UVacat.c**. All C code is
 automatically linked with the C library, which is full of useful functions you
 can call to implement your program. Learn more about the C library
 [here](https://en.wikipedia.org/wiki/C_standard_library) and perhaps
@@ -154,19 +154,19 @@ file (thus indicating you no longer need to read from it).
 
 **Details**
 
-* Your program **wcat** can be invoked with one or more files on the command
+* Your program **UVacat** can be invoked with one or more files on the command
   line; it should just print out each file in turn. 
-* In all non-error cases, **wcat** should exit with status code 0, usually by
+* In all non-error cases, **UVacat** should exit with status code 0, usually by
   returning a 0 from **main()** (or by calling **exit(0)**).
-* If *no files* are specified on the command line, **wcat** should just exit
+* If *no files* are specified on the command line, **UVacat** should just exit
   and return 0. Note that this is slightly different than the behavior of 
   normal UNIX **cat** (if you'd like to, figure out the difference).
 * If the program tries to **fopen()** a file and fails, it should print the
-  exact message "wcat: cannot open file" (followed by a newline) and exit
+  exact message "UVacat: cannot open file" (followed by a newline) and exit
   with status code 1.  If multiple files are specified on the command line,
   the files should be printed out in order until the end of the file list is
   reached or an error opening a file is reached (at which point the error
-  message is printed and **wcat** exits). 
+  message is printed and **UVacat** exits). 
 
 
 ## UVagrep
@@ -212,15 +212,15 @@ even this line, which has barfood in it, will be printed.
 * For simplicity, if passed the empty string as a search string, **UVagrep**
   can either match NO lines or match ALL lines, both are acceptable.
 
-## wzip and wunzip
+## UVazip and UVaunzip
 
-The next tools you will build come in a pair, because one (**wzip**) is a
-file compression tool, and the other (**wunzip**) is a file decompression
+The next tools you will build come in a pair, because one (**UVazip**) is a
+file compression tool, and the other (**UVaunzip**) is a file decompression
 tool. 
 
 The type of compression used here is a simple form of compression called
 *run-length encoding* (*RLE*). RLE is quite simple: when you encounter **n**
-characters of the same type in a row, the compression tool (**wzip**) will
+characters of the same type in a row, the compression tool (**UVazip**) will
 turn that into the number **n** and a single instance of the character.
 
 Thus, if we had a file with the following contents:
@@ -239,49 +239,49 @@ character in ASCII. Thus, a compressed file will consist of some number of
 length) and the single character. 
 
 To write out an integer in binary format (not ASCII), you should use
-**fwrite()**. Read the man page for more details. For **wzip**, all
+**fwrite()**. Read the man page for more details. For **UVazip**, all
 output should be written to standard output (the **stdout** file stream,
 which, as with **stdin**, is already open when the program starts running). 
 
-Note that typical usage of the **wzip** tool would thus use shell 
+Note that typical usage of the **UVazip** tool would thus use shell 
 redirection in order to write the compressed output to a file. For example,
 to compress the file **file.txt** into a (hopefully smaller) **file.z**,
 you would type:
 
 ```
-prompt> ./wzip file.txt > file.z
+prompt> ./UVazip file.txt > file.z
 ```
 
 The "greater than" sign is a UNIX shell redirection; in this case, it ensures
-that the output from **wzip** is written to the file **file.z** (instead of
+that the output from **UVazip** is written to the file **file.z** (instead of
 being printed to the screen). You'll learn more about how this works a little
 later in the course.
 
-The **wunzip** tool simply does the reverse of the **wzip** tool, taking
+The **UVaunzip** tool simply does the reverse of the **UVazip** tool, taking
 in a compressed file and writing (to standard output again) the uncompressed
 results. For example, to see the contents of **file.txt**, you would type:
 
 ```
-prompt> ./wunzip file.z
+prompt> ./UVaunzip file.z
 ```
 
-**wunzip** should read in the compressed file (likely using **fread()**)
+**UVaunzip** should read in the compressed file (likely using **fread()**)
 and print out the uncompressed output to standard output using **printf()**.
 
 **Details**
 
 * Correct invocation should pass one or more files via the command line to the 
   program; if no files are specified, the program should exit with return code
-  1 and print "wzip: file1 [file2 ...]" (followed by a newline) or
-  "wunzip: file1 [file2 ...]" (followed by a newline) for **wzip** and
-  **wunzip** respectively. 
+  1 and print "UVazip: file1 [file2 ...]" (followed by a newline) or
+  "UVaunzip: file1 [file2 ...]" (followed by a newline) for **UVazip** and
+  **UVaunzip** respectively. 
 * The format of the compressed file must match the description above exactly
   (a 4-byte integer followed by a character for each run).
-* Do note that if multiple files are passed to **wzip*, they are compressed
+* Do note that if multiple files are passed to **UVazip**, they are compressed
   into a single compressed output, and when unzipped, will turn into a single
   uncompressed stream of text (thus, the information that multiple files were
-  originally input into **wzip** is lost). The same thing holds for
-  **wunzip**. 
+  originally input into **UVazip** is lost). The same thing holds for
+  **UVaunzip**. 
 
 
 ### Footnotes
