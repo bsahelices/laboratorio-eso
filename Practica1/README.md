@@ -23,7 +23,7 @@ these skills already, this is not the right place to start.
 
 Summary of what gets turned in:
 * A bunch of single .c files for each of the utilities below: **wcat.c**,
-  **wgrep.c**, **wzip.c**, and **wunzip.c**.
+  **UVagrep.c**, **wzip.c**, and **wunzip.c**.
 * Each should compile successfully when compiled with the **-Wall** and
 **-Werror** flags.
 * Each should (hopefully) pass the tests we supply to you.
@@ -169,9 +169,9 @@ file (thus indicating you no longer need to read from it).
   message is printed and **wcat** exits). 
 
 
-## wgrep
+## UVagrep
 
-The second utility you will build is called **wgrep**, a variant of the UNIX
+The second utility you will build is called **UVagrep**, a variant of the UNIX
 tool **grep**. This tool looks through a file, line by line, trying to find a
 user-specified search term in the line. If a line has the word within it, the
 line is printed out, otherwise it is not. 
@@ -179,7 +179,7 @@ line is printed out, otherwise it is not.
 Here is how a user would look for the term **foo** in the file **bar.txt**:
 
 ```
-prompt> ./wgrep foo bar.txt
+prompt> ./UVagrep foo bar.txt
 this line has foo in it
 so does this foolish line; do you see where?
 even this line, which has barfood in it, will be printed.
@@ -187,29 +187,29 @@ even this line, which has barfood in it, will be printed.
 
 **Details**
 
-* Your program **wgrep** is always passed a search term and zero or
+* Your program **UVagrep** is always passed a search term and zero or
   more files to grep through (thus, more than one is possible). It should go
   through each line and see if the search term is in it; if so, the line
   should be printed, and if not, the line should be skipped.
 * The matching is case sensitive. Thus, if searching for **foo**, lines
   with **Foo** will *not* match.
 * Lines can be arbitrarily long (that is, you may see many many characters
-  before you encounter a newline character, \\n). **wgrep** should work
+  before you encounter a newline character, \\n). **UVagrep** should work
   as expected even with very long lines. For this, you might want to look
   into the **getline()** library call (instead of **fgets()**), or roll your
   own. 
-* If **wgrep** is passed no command-line arguments, it should print
-  "wgrep: searchterm [file ...]" (followed by a newline) and exit with
+* If **UVagrep** is passed no command-line arguments, it should print
+  "UVagrep: searchterm [file ...]" (followed by a newline) and exit with
   status 1.  
-* If **wgrep** encounters a file that it cannot open, it should print
-  "wgrep: cannot open file" (followed by a newline) and exit with status 1. 
-* In all other cases, **wgrep** should exit with return code 0.
-* If a search term, but no file, is specified, **wgrep** should work,
-  but instead of reading from a file, **wgrep** should read from
+* If **UVagrep** encounters a file that it cannot open, it should print
+  "UVagrep: cannot open file" (followed by a newline) and exit with status 1. 
+* In all other cases, **UVagrep** should exit with return code 0.
+* If a search term, but no file, is specified, **UVagrep** should work,
+  but instead of reading from a file, **UVagrep** should read from
   *standard input*. Doing so is easy, because the file stream **stdin**
   is already open; you can use **fgets()** (or similar routines) to
   read from it.
-* For simplicity, if passed the empty string as a search string, **wgrep**
+* For simplicity, if passed the empty string as a search string, **UVagrep**
   can either match NO lines or match ALL lines, both are acceptable.
 
 ## wzip and wunzip
