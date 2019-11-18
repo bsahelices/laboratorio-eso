@@ -12,15 +12,15 @@ currently available is found [here](https://github.com/remzi-arpacidusseau/ostep
 A specific testing script, found in each project directory, can be used to run
 the tests against your code. 
 
-For example, in the initial utilities project, the relatively simple `wcat`
-program that you create can be tested by running the `test-wcat.sh` script.
+For example, in the initial utilities project, the relatively simple `UVacat`
+program that you create can be tested by running the `test-UVacat.sh` script.
 This could be accomplished by the following commands:
 ```sh
-prompt> git clone https://github.com/remzi-arpacidusseau/ostep-projects
-prompt> cd ostep-projects/initial-utilities/wcat
-prompt> emacs -nw wcat.c 
-prompt> gcc -o wcat wcat.c -Wall 
-prompt> ./test-wcat.sh
+prompt> git clone https://github.com/bsahelices/laboratorio-eso
+prompt> cd laboratorio-eso/Practica1/UVacat
+prompt> emacs -nw UVacat.c  or vi UVacat.c
+prompt> gcc -o UVacat UVacat.c -Wall -Werror
+prompt> ./test-UVacat.sh
 test 1: passed
 test 2: passed
 test 3: passed
@@ -30,7 +30,7 @@ test 6: passed
 test 7: passed
 prompt> 
 ```
-Of course, this sequence assumes (a) you use `emacs` (you should!), (b) your
+Of course, this sequence assumes (a) you use `emacs` (you should!) or vi, (b) your
 code is written in one shot (impressive!), and (c) that it works perfectly
 (well done!). Even for simple assignments, it is likely that the
 compile/run/debug cycle might take a few iterations.
@@ -47,61 +47,23 @@ Realize the best thing you can do to learn to program in any environment is to
 program **a lot**. These small projects are only the beginning of that
 journey; you'll have to do more on your own to truly become proficient.
 
-* [Unix Utilities](initial-utilities) (cat, grep, zip/unzip)
+* Unix Utilities (cat, grep, zip/unzip)
 * Sort (text-based)
 * Sort (binary)
-* [Reverse](initial-reverse) (very simple reverse program)
+* Reverse (very simple reverse program)
 
 ### Processes and Scheduling
 
-* [Shell](processes-shell)
-
-### Virtual Memory
-
-* Memory Allocator
-
-### Concurrency
-
-* [Web Server](concurrency-webserver)
-* [Parallel Zip](concurrency-pzip)
-* [MapReduce](concurrency-mapreduce)
-* Web Crawler
-
-### File Systems
-
-* [File System Checker](filesystems-checker)
-
-### Distributed Systems
+* Shell 
 
 
-## Kernel Hacking Projects (xv6)
+## Kernel Hacking Projects (Minix)
 
 These projects all are to be done inside the
-[xv6](https://pdos.csail.mit.edu/6.828/2017/xv6.html) kernel based on an early
-version of Unix and developed at MIT. Unlike the C/Linux projects, these give
+Mini. See ESO main page on the Moodle of the school. Unlike the C/Linux projects, these give
 you direct experience inside a real, working operating system (albeit a simple
 one).
 
-Read the [install notes](INSTALL-xv6.md) to see how to download the latest xv6 
-and install the tools you'll need.
-
-### Initial Projects
-
-* [Intro To xv6](initial-xv6)
-
-### Processes and Scheduling
-
-* [Scheduling (Lottery)](scheduling-xv6-lottery)
-
-### Virtual Memory
-
-* [Virtual Memory (Null Pointer and Read-Only Regions)](vm-xv6-intro)
-
-### Concurrency
-
-* [Kernel Threads (Basic Implementation)](concurrency-xv6-threads)
-
-### File Systems
 
 
 
