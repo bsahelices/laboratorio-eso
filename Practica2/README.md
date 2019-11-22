@@ -164,14 +164,14 @@ redirection operators or multiple files to the right of the redirection sign
 are errors.
 
 Use the function `dup2()` to create a duplicate of a file descriptor
-in output and stdout, which are the numbers 1 and 2. 
+in stdout and stderr, which are the numbers 1 and 2. 
 
-* If fout has the file descriptor of the file to redirect, then once
-the son process has been created (but before `execvp()`invocation)
+* If `fout` has the file descriptor of the file to redirect, then once
+the son process has been created (but before `execvp()` invocation)
 duplicate stdout and stderr of the process:
 
-  dup2(fout,1)
-  dup2(fout,2)
+**  dup2(fout,1)
+**  dup2(fout,2)
 
 Note: don't worry about redirection for built-in commands (e.g., we will
 not test what happens when you type `cd /bin > file`).
