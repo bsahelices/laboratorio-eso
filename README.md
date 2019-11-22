@@ -1,10 +1,11 @@
 
-# Projects for an Operating Systems Class
+# Projects for `Estructura de Sistemas Operativos`
 
 This repository holds a number of projects that can be used in an operating
 systems class aimed at upper-level undergraduates and (in some cases)
 beginning graduate students. They are based on years of teaching such a course
-at the University of Wisconsin-Madison.
+at the University of Wisconsin-Madison. This version is adapted for
+`Estructura de Sistemas Operativos` course
 
 Also (increasingly) available are some tests to see if your code works; eventually
 every project will have a set of tests available. The testing framework that is
@@ -30,7 +31,7 @@ test 6: passed
 test 7: passed
 prompt> 
 ```
-Of course, this sequence assumes (a) you use `emacs` (you should!) or vi, (b) your
+Of course, this sequence assumes (a) you use `emacs` or vi, (b) your
 code is written in one shot (impressive!), and (c) that it works perfectly
 (well done!). Even for simple assignments, it is likely that the
 compile/run/debug cycle might take a few iterations.
