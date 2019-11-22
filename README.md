@@ -48,8 +48,6 @@ program **a lot**. These small projects are only the beginning of that
 journey; you'll have to do more on your own to truly become proficient.
 
 * Unix Utilities (cat, grep, zip/unzip)
-* Sort (text-based)
-* Sort (binary)
 * Reverse (very simple reverse program)
 
 ### Processes and Scheduling
@@ -59,8 +57,8 @@ journey; you'll have to do more on your own to truly become proficient.
 
 ## Kernel Hacking Projects (Minix)
 
-These projects all are to be done inside the
-Mini. See ESO main page on the Moodle of the school. Unlike the C/Linux projects, these give
+These projects all are to be done with Minix operating system. 
+See ESO main page on the Moodle of the school. Unlike the C/Linux projects, these give
 you direct experience inside a real, working operating system (albeit a simple
 one).
 
