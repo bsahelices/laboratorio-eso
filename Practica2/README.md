@@ -28,24 +28,24 @@ shell, by reading the man pages or other online materials.
 
 ## Program Specifications
 
-### Basic Shell: `wish`
+### Basic Shell: `UVash`
 
-Your basic shell, called `wish` (short for Wisconsin Shell, naturally), is
-basically an interactive loop: it repeatedly prints a prompt `wish> ` (note
+Your basic shell, called `UVash` (short for UVa Shell, naturally), is
+basically an interactive loop: it repeatedly prints a prompt `UVash> ` (note
 the space after the greater-than sign), parses the input, executes the command
 specified on that line of input, and waits for the command to finish. This is
 repeated until the user types `exit`.  The name of your final executable
-should be `wish`.
+should be `UVash`.
 
 The shell can be invoked with either no arguments or a single argument;
 anything else is an error. Here is the no-argument way:
 
 ```
-prompt> ./wish
-wish> 
+prompt> ./UVash
+UVash> 
 ```
 
-At this point, `wish` is running, and ready to accept commands. Type away!
+At this point, `UVash` is running, and ready to accept commands. Type away!
 
 The mode above is called *interactive* mode, and allows the user to type
 commands directly. The shell also supports a *batch mode*, which instead reads
@@ -53,11 +53,11 @@ input from a batch file and executes commands from therein. Here is how you
 run the shell with a batch file named `batch.txt`:
 
 ```
-prompt> ./wish batch.txt
+prompt> ./UVash batch.txt
 ```
 
 One difference between batch and interactive modes: in interactive mode, a
-prompt is printed (`wish> `). In batch mode, no prompt should be printed.
+prompt is printed (`UVash> `). In batch mode, no prompt should be printed.
 
 You should structure your shell such that it creates a process for each new
 command (the exception are *built-in commands*, discussed below).  Your basic
@@ -88,40 +88,30 @@ In either mode, if you hit the end-of-file marker (EOF), you should call
 `exit(0)` and exit gracefully. 
 
 To parse the input line into constituent pieces, you might want to use
-`strsep()`. Read the man page (carefully) for more details.
+`strsep()`. Read the man page (carefully) for more details. You can also
+use `strtok()` which is an older version of `strsep()`.
 
 To execute commands, look into `fork()`, `exec()`, and `wait()/waitpid()`.
-See the man pages for these functions, and also read the relevant [book
-chapter](http://www.ostep.org/cpu-api.pdf) for a brief overview.
+See the man pages for these functions, and also read the documentation
+in `Operating Systems` course or a brief overview.
 
 You will note that there are a variety of commands in the `exec` family; for
-this project, you must use `execv`. You should **not** use the `system()`
-library function call to run a command.  Remember that if `execv()` is
+this project, you must use `execvp`. You should **not** use the `system()`
+library function call to run a command.  Remember that if `execvp()` is
 successful, it will not return; if it does return, there was an error (e.g.,
 the command does not exist). The most challenging part is getting the
 arguments correctly specified. 
 
 ### Paths
 
-In our example above, the user typed `ls` but the shell knew to execute the
-program `/bin/ls`. How does your shell know this?
-
-It turns out that the user must specify a **path** variable to describe the
-set of directories to search for executables; the set of directories that
-comprise the path are sometimes called the *search path* of the shell. The
-path variable contains the list of all directories to search, in order, when
-the user types a command. 
+As long as we use `execvp()` it will not be necessary to specify any
+path in the command line because `execvp()` accesses `PATH` environment
+variable to locate the executable files. This is called the
+*search path*. 
 
 **Important:** Note that the shell itself does not *implement* `ls` or other
 commands (except built-ins). All it does is find those executables in one of
-the directories specified by `path` and create a new process to run them.
-
-To check if a particular file exists in a directory and is executable,
-consider the `access()` system call. For example, when the user types `ls`,
-and path is set to include both `/bin` and `/usr/bin`, try `access("/bin/ls",
-X_OK)`. If that fails, try "/usr/bin/ls". If that fails too, it is an error.
-
-Your initial shell path should contain one directory: `/bin'
+the directories specified by `PATH` and create a new process to run them.
 
 Note: Most shells allow you to specify a binary specifically without using a
 search path, using either **absolute paths** or **relative paths**. For
@@ -137,9 +127,9 @@ Whenever your shell accepts a command, it should check whether the command is
 a **built-in command** or not. If it is, it should not be executed like other
 programs. Instead, your shell will invoke your implementation of the built-in
 command. For example, to implement the `exit` built-in command, you simply
-call `exit(0);` in your wish source code, which then will exit the shell.
+call `exit(0);` in your UVash source code, which then will exit the shell.
 
-In this project, you should implement `exit`, `cd`, and `path` as built-in
+In this project, you should implement `exit` and `cd` as built-in
 commands.
 
 * `exit`: When the user types `exit`, your shell should simply call the `exit`
@@ -150,13 +140,6 @@ commands.
 error). To change directories, use the `chdir()` system call with the argument
 supplied by the user; if `chdir` fails, that is also an error.
 
-* `path`: The `path` command takes 0 or more arguments, with each argument
-  separated by whitespace from the others. A typical usage would be like this:
-  `wish> path /bin /usr/bin`, which would add `/bin` and `/usr/bin` to the
-  search path of the shell. If the user sets path to be empty, then the shell
-  should not be able to run any programs (except built-in commands). The
-  `path` command always overwrites the old path with the newly specified
-  path. 
 
 ### Redirection
 
@@ -180,8 +163,18 @@ followed by the redirection symbol followed by a filename. Multiple
 redirection operators or multiple files to the right of the redirection sign
 are errors.
 
+Use the function `dup2()` to create a duplicate of a file descriptor
+in output and stdout, which are the numbers 1 and 2. 
+
+* If fout has the file descriptor of the file to redirect, then once
+the son process has been created (but before `execvp()`invocation)
+duplicate stdout and stderr of the process:
+
+  dup2(fout,1)
+  dup2(fout,2)
+
 Note: don't worry about redirection for built-in commands (e.g., we will
-not test what happens when you type `path /bin > file`).
+not test what happens when you type `cd /bin > file`).
 
 ### Parallel Commands
 
@@ -189,7 +182,7 @@ Your shell will also allow the user to launch parallel commands. This is
 accomplished with the ampersand operator as follows:
 
 ```
-wish> cmd1 & cmd2 args1 args2 & cmd3 args1
+UVash> cmd1 & cmd2 args1 args2 & cmd3 args1
 ```
 
 In this case, instead of running `cmd1` and then waiting for it to finish,
@@ -210,7 +203,7 @@ message whenever you encounter an error of any type:
 
 ```
     char error_message[30] = "An error has occurred\n";
-    write(STDERR_FILENO, error_message, strlen(error_message)); 
+    fprintf(stderr, "%s", error_message);
 ```
 
 The error message should be printed to stderr (standard error), as shown
@@ -257,10 +250,21 @@ behaves well. Good code comes through testing; you must run many different
 tests to make sure things work as desired. Don't be gentle -- other users
 certainly won't be. 
 
-Finally, keep versions of your code. More advanced programmers will use a
+Keep versions of your code. More advanced programmers will use a
 source control system such as git. Minimally, when you get a piece of
 functionality working, make a copy of your .c file (perhaps a subdirectory
 with a version number, such as v1, v2, etc.). By keeping older, working
 versions around, you can comfortably work on adding new functionality, safe in
 the knowledge you can always go back to an older, working version if need be.
 
+Finally, use this line to compile:
+
+```
+  gcc -o UVash UVash.c -Wall -Werror
+```
+
+This line shows all warnings and, also, treat each warning as an error. 
+This is a good discipline that forces you to check each warning message,
+understand it and, finally, solve it. The reason is that a lot of difficult
+errors in green programmers are easily solved and the compiler hints are
+a very good help.

@@ -1,5 +1,4 @@
-path /bin tests
-p1.sh > /tmp/output201 & p2.sh > /tmp/output202 & p3.sh > /tmp/output203
+./tests/p1.sh > /tmp/output201 & ./tests/p2.sh > /tmp/output202 & ./tests/p3.sh > /tmp/output203
 cat /tmp/output201
 cat /tmp/output202
 cat /tmp/output203
