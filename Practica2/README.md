@@ -170,8 +170,9 @@ in stdout and stderr, which are the numbers 1 and 2.
 the son process has been created (but before `execvp()` invocation)
 duplicate stdout and stderr of the process:
 
-**  dup2(fout,1)
-**  dup2(fout,2)
+  dup2(fout,1)
+
+  dup2(fout,2)
 
 Note: don't worry about redirection for built-in commands (e.g., we will
 not test what happens when you type `cd /bin > file`).
@@ -263,7 +264,7 @@ Finally, use this line to compile:
   gcc -o UVash UVash.c -Wall -Werror
 ```
 
-This line shows all warnings and, also, treat each warning as an error. 
+`-Wall` option shows all warnings and `-Werror` considers each warning as an error. 
 This is a good discipline that forces you to check each warning message,
 understand it and, finally, solve it. The reason is that a lot of difficult
 errors in green programmers are easily solved and the compiler hints are
