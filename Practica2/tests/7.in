@@ -1,6 +1,3 @@
-path tests
-p1.sh
-path
-p1.sh
-ls
+./tests/p1.sh
+./tests/p1.sh
 exit
