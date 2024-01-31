@@ -36,6 +36,14 @@ code is written in one shot (impressive!), and (c) that it works perfectly
 (well done!). Even for simple assignments, it is likely that the
 compile/run/debug cycle might take a few iterations.
 
+Also, if you want to check all tests without stopping in the failing ones,
+use the option -c:
+
+```sh
+prompt> ./test-UVacat.sh -c
+```
+
+
 ## C/Linux Projects
 
 ### Initial Projects
